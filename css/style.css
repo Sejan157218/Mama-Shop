@@ -60,6 +60,11 @@ body {
 .cart-main {
   padding-right: 30px;
 }
+
+.star-icon{
+  display: flex;
+  justify-content: space-between;
+}
 @media only screen and (max-width: 768px) {
   #all-products {
     display: grid;
