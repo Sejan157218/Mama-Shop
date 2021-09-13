@@ -10,11 +10,6 @@ loadProducts();
 const showProducts = (products) => {
   // const allProducts = products.map((pd) => pd);
   for (const product of products) {
-    const searchValue = document.getElementById('input-field').value.toLowerCase();
-    // console.log(product.title);
-    if(product.title.toLowerCase().includes(searchValue)){
-      
-    }
     const image = product.image; // correction 
     const div = document.createElement("div");
     div.classList.add("product");
@@ -51,7 +46,7 @@ const showProducts = (products) => {
 };
 let count = 0;
 const addToCart = (id, price) => {
-  count = count + 1;
+  count ++;
   updatePrice("price", price);
 
   updateTaxAndCharge();
@@ -105,3 +100,26 @@ const updateTotal = () => {
     getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
+
+
+const searchProducts=()=>{
+    const searchValue = document.getElementById('input-field').value.toLowerCase();
+    const productSearch = document.getElementsByClassName("product");
+    const errorMsg = document.getElementById('error-msg');
+    const noFound = document.getElementById('nofound-result');
+    if(searchValue===''){
+      // document.getElementById('input-field').value = '';
+      errorMsg.innerText = 'Please a name what you want';
+      return;
+    }
+    for (const element of productSearch) {      
+     if (element.innerText.toLowerCase().includes(searchValue)){
+        element.style.display = "block";
+      } 
+      else {
+        element.style.display = "none";
+      }
+    }   
+    errorMsg.textContent = '';
+    document.getElementById('input-field').value = '';
+  }
