@@ -20,16 +20,16 @@ const showProducts = (products) => {
     const div = document.createElement('div');
     div.classList.add('col');
     div.innerHTML=`
-    <div class="card h-100">
+    <div class="card h-100 shadow p-3 mb-5 bg-body rounded">
       <img src="${image}" class="product-image" alt="...">
       <div class="card-body">
-        <h5 class="card-title">${product.title}</h5>
-        <h5>Category: ${product.category}</h5>
-        <h2>Price: $ ${product.price}</h2>
-        <h5 class="card-text">Rating : ${product.rating.rate}
+        <h2 class="card-title">${product.title}</h2>
+        <h6>Category: ${product.category}</h6>
+        <h3>Price: $ ${product.price}</h3>
+        <h6 class="card-text">Rating : ${product.rating.rate}
           <i class="bi bi-person-fill"></i> 
               <span>${product.rating.count} </span>
-            </h5>
+            </h6>
       </div>
       <div class="card-footer d-flex justify-content-between">
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
@@ -38,37 +38,11 @@ const showProducts = (products) => {
   </div>
     `
 
-    
-    /* const div = document.createElement("div");
-    div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
-      <div>
-    <img class="product-image" src=${image}></img>
-      </div>
-      <h3>${product.title}</h3>
-      <p>Category: ${product.category}</p>
-      <h2>Price: $ ${product.price}</h2>
-                    <div class="">
-                            <div>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span class="text-secondary"> ${product.rating.rate}</span>
-                            </div>
-                            <div>
-                                <div class="rounded-pill bg-danger">
-                                <i class="bi bi-person-fill"></i>
-                                    <span>${product.rating.count} </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button></div>
-      `; */
+    /* <i class="bi bi-star-fill"></i>
+    <i class="bi bi-star-fill"></i>
+    <i class="bi bi-star-fill"></i>
+    <i class="bi bi-star-fill"></i>
+    <i class="bi bi-star-half"></i> */
     document.getElementById("all-products").appendChild(div);
   }
 };
@@ -93,9 +67,6 @@ const updatePrice = (id, value) => {
   const convertPrice = parseFloat(value);
   const total = convertedOldPrice + convertPrice;
   document.getElementById(id).innerText = parseFloat(total).toFixed(2);//remove Math.round// 
-
-  // call updateTotal() 
- 
 };
 
 // set innerText function
@@ -118,6 +89,8 @@ const updateTaxAndCharge = () => {
     setInnerText("delivery-charge", 60);
     setInnerText("total-tax", priceConverted * 0.4);
   }
+  
+  // call updateTotal() 
   updateTotal();
 };
 
@@ -130,7 +103,7 @@ const updateTotal = () => {
   document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
 
-
+// search product and empty error
 const searchProducts=()=>{
     const searchValue = document.getElementById('input-field').value.toLowerCase();
     const productSearch = document.getElementsByClassName("product");
@@ -138,7 +111,7 @@ const searchProducts=()=>{
     const noFound = document.getElementById('nofound-result');
     if(searchValue===''){
       // document.getElementById('input-field').value = '';
-      errorMsg.innerText = 'Please a name what you want';
+      errorMsg.innerText = 'Please Enter a product name!!!';
       return;
     }
     for (const element of productSearch) {      
@@ -153,6 +126,8 @@ const searchProducts=()=>{
     document.getElementById('input-field').value = '';
   };
 
+
+  // show details
   const showDetails=(id)=>{
     const url = `https://fakestoreapi.com/products/${id}`;
     featchURL(url).then(data=>{
