@@ -1,8 +1,14 @@
+const featchURL =async (url) =>{
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+  
+}
+
 const loadProducts = () => {
-  const url = `https://fakestoreapi.com/products`;
-  fetch('../db.json')
-    .then((response) => response.json())
-    .then((data) => showProducts(data));
+  featchURL(`./db.json`).then(data=>{
+    showProducts(data);
+  });
 };
 loadProducts();
 
@@ -39,7 +45,7 @@ const showProducts = (products) => {
                     </div>
 
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+      <button id="details-btn" class="btn btn-danger" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button></div>
       `;
     document.getElementById("all-products").appendChild(div);
   }
@@ -122,4 +128,20 @@ const searchProducts=()=>{
     }   
     errorMsg.textContent = '';
     document.getElementById('input-field').value = '';
+  };
+
+  const showDetails=(id)=>{
+    const url = `https://fakestoreapi.com/products/${id}`;
+    featchURL(url).then(data=>{
+      const modalBody = document.getElementById('modal-body');
+      modalBody.innerHTML =`
+    <div class="card">
+    <img  src="${data.image}" class="card-img-top img-fliud" alt="product img">
+    <div class="card-body">
+      <h5 class="card-title">${data.title}</h5>
+      <p class="card-text">${data.description}</p>
+      <p class="card-text"><small class="text-muted">Rating : ${data.rating.rate}      <i class="bi bi-person-fill"></i>${data.rating.rate}</small></p>
+    </div>
+  </div> `;
+    });
   }
