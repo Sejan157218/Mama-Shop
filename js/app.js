@@ -10,6 +10,11 @@ loadProducts();
 const showProducts = (products) => {
   // const allProducts = products.map((pd) => pd);
   for (const product of products) {
+    const searchValue = document.getElementById('input-field').value.toLowerCase();
+    // console.log(product.title);
+    if(product.title.toLowerCase().includes(searchValue)){
+      
+    }
     const image = product.image; // correction 
     const div = document.createElement("div");
     div.classList.add("product");
@@ -27,12 +32,12 @@ const showProducts = (products) => {
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-half"></i>
-                            <span class="text-secondary"> 4.5</span>
+                            <span class="text-secondary"> ${product.rating.rate}</span>
                             </div>
                             <div>
                                 <div class="rounded-pill bg-danger">
                                 <i class="bi bi-person-fill"></i>
-                                    <span> 5 </span>
+                                    <span>${product.rating.count} </span>
                                 </div>
                             </div>
                         </div>
