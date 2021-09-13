@@ -17,7 +17,29 @@ const showProducts = (products) => {
   // const allProducts = products.map((pd) => pd);
   for (const product of products) {
     const image = product.image; // correction 
-    const div = document.createElement("div");
+    const div = document.createElement('div');
+    div.classList.add('col');
+    div.innerHTML=`
+    <div class="card h-100">
+      <img src="${image}" class="product-image" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${product.title}</h5>
+        <h5>Category: ${product.category}</h5>
+        <h2>Price: $ ${product.price}</h2>
+        <h5 class="card-text">Rating : ${product.rating.rate}
+          <i class="bi bi-person-fill"></i> 
+              <span>${product.rating.count} </span>
+            </h5>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
+      <button id="details-btn" class="btn btn-danger  px-4" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
+    </div>
+  </div>
+    `
+
+    
+    /* const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
       <div>
@@ -46,7 +68,7 @@ const showProducts = (products) => {
 
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
       <button id="details-btn" class="btn btn-danger" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button></div>
-      `;
+      `; */
     document.getElementById("all-products").appendChild(div);
   }
 };
@@ -73,7 +95,7 @@ const updatePrice = (id, value) => {
   document.getElementById(id).innerText = parseFloat(total).toFixed(2);//remove Math.round// 
 
   // call updateTotal() 
-  updateTotal();
+ 
 };
 
 // set innerText function
@@ -96,6 +118,7 @@ const updateTaxAndCharge = () => {
     setInnerText("delivery-charge", 60);
     setInnerText("total-tax", priceConverted * 0.4);
   }
+  updateTotal();
 };
 
 //grandTotal update function
@@ -135,8 +158,8 @@ const searchProducts=()=>{
     featchURL(url).then(data=>{
       const modalBody = document.getElementById('modal-body');
       modalBody.innerHTML =`
-    <div class="card">
-    <img  src="${data.image}" class="card-img-top img-fliud" alt="product img">
+    <div class="modal-card">
+    <img  src="${data.image}" class=" modal-img" alt="product img">
     <div class="card-body">
       <h5 class="card-title">${data.title}</h5>
       <p class="card-text">${data.description}</p>

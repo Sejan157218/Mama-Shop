@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FakeStore</title>
+  <title>SHOP MAMA</title>
   <link rel="stylesheet" href="./css/style.css" />
   <!-- Latest compiled and minified CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -23,12 +23,12 @@
   <header></header>
   <main class="main container">
 
-    <div class="input-group mb-3 w-75 mx-auto">
-      <input id="input-field" type="text" class="form-control rounded-3" placeholder="Search Book Name…" aria-label="Recipient's username" aria-describedby="button-addon2">
-      <button class="btn btn-outline-secondary mx-2 rounded-3" type="button" id="search-btn" onclick="searchProducts()">Search</button>
+    <div class="input-group mb-3 w-75 mx-auto my-5">
+      <input id="input-field" type="text" class="form-control rounded-3" placeholder="Search Product Name…">
+      <button class="btn btn-outline-secondary mx-2 px-4 rounded-3" type="button" id="search-btn" onclick="searchProducts()">Search</button>
     </div>
     <!-- error msg -->
-    <div id="error-msg" class="text-center">
+    <div id="error-msg" class="text-center fs-1">
       
     </div>
     <div id="nofound-result" class="text-center">
@@ -44,11 +44,17 @@
         </button>
       </div>
     </div> -->
+
+    
+
     <div class="row">
       <div class="col-md-9 col-lg-9 col-sm-7">
-        <div id="all-products" class="">
-          <!-- delete h1 tag -->
+        <div id="all-products" class="row row-cols-1 row-cols-md-3 g-4">
+          
         </div>
+        <!-- <div id="all-products" class="">
+        
+        </div> -->
       </div>
       <div class="col-md-3 col-lg-3 col-sm-5 cart-main">
         <div class="cart" id="my-cart">
@@ -107,7 +113,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div id="modal-body" class="modal-body">
@@ -115,7 +121,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
       </div>
     </div>
   </div>
