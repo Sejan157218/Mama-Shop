@@ -23,7 +23,7 @@ const showProducts = (products) => {
     <div class="card h-100 shadow p-3 mb-5 bg-body rounded">
       <img src="${image}" class="product-image" alt="...">
       <div class="card-body">
-        <h2 class="card-title">${product.title}</h2>
+        <h4 class="card-title">${product.title}</h4>
         <h6>Category: ${product.category}</h6>
         <h3>Price: $ ${product.price}</h3>
         <h6 class="card-text">Rating : ${product.rating.rate}

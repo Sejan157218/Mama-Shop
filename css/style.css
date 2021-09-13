@@ -9,6 +9,10 @@ body {
 .search-border{
   border: 3px solid #ff4747;
 }
+
+.card-body{
+  padding: 0;
+}
 /* .search-field {
   border: none;
   border-radius: 50px;
