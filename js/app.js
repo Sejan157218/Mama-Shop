@@ -12,10 +12,28 @@ const loadProducts = () => {
 };
 loadProducts();
 
+
+const starRating = starrating =>{
+  const starratingObejct= starrating;
+
+  for(let element in starratingObejct){
+    console.log(element);
+    const starPercentetage = (starratingObejct[element]/5) * 100;
+  const starPercentetageRounded = `${Math.round(starPercentetage/10) * 10}%`
+  console.log(starPercentetageRounded);
+  // console.log(document.querySelector(`.star .star-inner`));
+  // document.querySelector(`.${element} .star-inner`).style.width = starPercentetageRounded;
+  document.querySelector(`.star .star-inner`).style.width = starPercentetageRounded;
+  }
+  
+  
+}
 // show all product in UI 
 const showProducts = (products) => {
   // const allProducts = products.map((pd) => pd);
   for (const product of products) {
+    let {rate} = product.rating
+    
     const image = product.image; // correction 
     const div = document.createElement('div');
     div.classList.add('col');
@@ -26,25 +44,28 @@ const showProducts = (products) => {
         <h4 class="card-title">${product.title}</h4>
         <h6>Category: ${product.category}</h6>
         <h3>Price: $ ${product.price}</h3>
-        <h6 class="card-text">Rating : ${product.rating.rate}
+        <h6 class="card-text">
+        
+        Rating : ${product.rating.rate}
           <i class="bi bi-person-fill"></i> 
               <span>${product.rating.count} </span>
             </h6>
       </div>
+      <div class = "star">
+      <div class="star-outer"></div>
+      <div class="star-inner"></div>
+      </div>
       <div class="card-footer d-flex justify-content-between">
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="btn button-color fs-5 text">add to cart</button>
-      <button id="details-btn" class="btn button-color fs-5 text" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
+      <button onclick="addToCart(${product.id},${product.price})" class="btn button-color px-2">add to cart</button>
+      <button class="btn button-color px-2" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
     </div>
   </div>
     `
-
-    /* <i class="bi bi-star-fill"></i>
-    <i class="bi bi-star-fill"></i>
-    <i class="bi bi-star-fill"></i>
-    <i class="bi bi-star-fill"></i>
-    <i class="bi bi-star-half"></i> */
     document.getElementById("all-products").appendChild(div);
+    starRating({rate});
+    
   }
+  
 };
 let count = 0;
 const addToCart = (id, price) => {
@@ -106,7 +127,7 @@ const updateTotal = () => {
 // search product and empty error
 const searchProducts=()=>{
     const searchValue = document.getElementById('input-field').value.toLowerCase();
-    const productSearch = document.getElementsByClassName("product");
+    const productSearch = document.getElementsByClassName("col");
     const errorMsg = document.getElementById('error-msg');
     const noFound = document.getElementById('nofound-result');
     if(searchValue===''){
