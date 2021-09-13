@@ -20,9 +20,9 @@ const showProducts = (products) => {
     const div = document.createElement('div');
     div.classList.add('col');
     div.innerHTML=`
-    <div class="card h-100 shadow p-3 mb-5 bg-body rounded">
+    <div class="card h-100 shadow p-3 mb-5 rounded">
       <img src="${image}" class="product-image" alt="...">
-      <div class="card-body">
+      <div class="card-body mt-5">
         <h4 class="card-title">${product.title}</h4>
         <h6>Category: ${product.category}</h6>
         <h3>Price: $ ${product.price}</h3>
@@ -32,8 +32,8 @@ const showProducts = (products) => {
             </h6>
       </div>
       <div class="card-footer d-flex justify-content-between">
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger  px-4" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
+      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="btn button-color fs-5 text">add to cart</button>
+      <button id="details-btn" class="btn button-color fs-5 text" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
     </div>
   </div>
     `
