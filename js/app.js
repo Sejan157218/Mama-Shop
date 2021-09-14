@@ -12,63 +12,44 @@ const loadProducts = () => {
 };
 loadProducts();
 
-
-const starRating = starrating =>{
-  const starratingObejct= starrating;
-
-  for(let element in starratingObejct){
-    console.log(element);
-    const starPercentetage = (starratingObejct[element]/5) * 100;
-  const starPercentetageRounded = `${Math.round(starPercentetage/10) * 10}%`
-  console.log(starPercentetageRounded);
-  // console.log(document.querySelector(`.star .star-inner`));
-  // document.querySelector(`.${element} .star-inner`).style.width = starPercentetageRounded;
-  document.querySelector(`.star .star-inner`).style.width = starPercentetageRounded;
-  }
-  
-  
-}
-// show all product in UI 
+// show all product in UI with Rating
 const showProducts = (products) => {
   // const allProducts = products.map((pd) => pd);
   for (const product of products) {
-    let {rate} = product.rating
-    
     const image = product.image; // correction 
+    const starPercentetage = (product.rating.rate/5) * 100;
+    const starPercentetageRounded = `${Math.round(starPercentetage/10) * 10}%`
     const div = document.createElement('div');
     div.classList.add('col');
     div.innerHTML=`
     <div class="card h-100 shadow p-3 mb-5 rounded">
-      <img src="${image}" class="product-image" alt="...">
-      <div class="card-body mt-5">
-        <h4 class="card-title">${product.title}</h4>
-        <h6>Category: ${product.category}</h6>
-        <h3>Price: $ ${product.price}</h3>
-        <h6 class="card-text">
-        
-        Rating : ${product.rating.rate}
-          <i class="bi bi-person-fill"></i> 
-              <span>${product.rating.count} </span>
-            </h6>
+        <img src="${image}" class="product-image" alt="...">
+        <div class="card-body mt-5">
+          <h4 class="card-title">${product.title}</h4>
+          <h6>Category: ${product.category}</h6>
+          <h3>Price: $ ${product.price}</h3>
+          <h6 class="card-text">
+          <div>
+          Rating :
+          <div class="star-outer my-3">
+            <div class="star-inner" style="width : ${starPercentetageRounded}"></div>
+            </div>(${product.rating.rate})</div>
+          <div>
+          Rating Count : 
+          <i class="fas fa-user mx-.50"></i>
+          <span>${product.rating.count} </span></h6>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+        <button onclick="addToCart(${product.price})" class="btn button-color px-2">add to cart</button>
+        <button class="btn button-color px-2" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
       </div>
-      <div class = "star">
-      <div class="star-outer"></div>
-      <div class="star-inner"></div>
-      </div>
-      <div class="card-footer d-flex justify-content-between">
-      <button onclick="addToCart(${product.id},${product.price})" class="btn button-color px-2">add to cart</button>
-      <button class="btn button-color px-2" onclick="showDetails(${product.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
     </div>
-  </div>
     `
-    document.getElementById("all-products").appendChild(div);
-    starRating({rate});
-    
-  }
-  
+    document.getElementById("all-products").appendChild(div);  
+  }  
 };
 let count = 0;
-const addToCart = (id, price) => {
+const addToCart = price => {
   count ++;
   updatePrice("price", price);
 
@@ -131,7 +112,6 @@ const searchProducts=()=>{
     const errorMsg = document.getElementById('error-msg');
     const noFound = document.getElementById('nofound-result');
     if(searchValue===''){
-      // document.getElementById('input-field').value = '';
       errorMsg.innerText = 'Please Enter a product name!!!';
       return;
     }
@@ -152,6 +132,8 @@ const searchProducts=()=>{
   const showDetails=(id)=>{
     const url = `https://fakestoreapi.com/products/${id}`;
     featchURL(url).then(data=>{
+      const starPercentetage = (data.rating.rate/5) * 100;
+    const starPercentetageRounded = `${Math.round(starPercentetage/10) * 10}%`
       const modalBody = document.getElementById('modal-body');
       modalBody.innerHTML =`
     <div class="modal-card">
@@ -159,7 +141,16 @@ const searchProducts=()=>{
     <div class="card-body">
       <h5 class="card-title">${data.title}</h5>
       <p class="card-text">${data.description}</p>
-      <p class="card-text"><small class="text-muted">Rating : ${data.rating.rate}      <i class="bi bi-person-fill"></i>${data.rating.count}</small></p>
+      <div>
+          Rating :
+          <div class="star-outer my-3">
+            <div class="star-inner" style="width : ${starPercentetageRounded}"></div>
+            </div>(${data.rating.rate})</div>
+          <div>
+          Rating Count : 
+          <i class="fas fa-user mx-.50"></i>
+          <span>${data.rating.count} </span></h6>
+        </div>
     </div>
   </div> `;
     });
