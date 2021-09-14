@@ -109,20 +109,36 @@ const updateTotal = () => {
 const searchProducts=()=>{
     const searchValue = document.getElementById('input-field').value.toLowerCase();
     const productSearch = document.getElementsByClassName("col");
+    const allProduct  = document.getElementById('all-products')
     const errorMsg = document.getElementById('error-msg');
-    const noFound = document.getElementById('nofound-result');
+    const noFound = document.getElementById('noresult-found');
+
+    // if search value empty
     if(searchValue===''){
       errorMsg.innerText = 'Please Enter a product name!!!';
+      noFound.textContent = '';
+      document.getElementById('input-field').value = '';
       return;
     }
+
     for (const element of productSearch) {      
      if (element.innerText.toLowerCase().includes(searchValue)){
         element.style.display = "block";
+        
       } 
       else {
         element.style.display = "none";
       }
-    }   
+    }
+    
+    // no result found
+    if(!allProduct.innerText.toLowerCase().includes(searchValue)){
+      noFound.innerText = 'NO Product Found!!!';
+      errorMsg.textContent = '';
+      document.getElementById('input-field').value = '';
+      return;
+    } 
+    noFound.textContent = '';  
     errorMsg.textContent = '';
     document.getElementById('input-field').value = '';
   };

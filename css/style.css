@@ -15,6 +15,9 @@ body {
   background-color: #051f2bc7;
     color: #ffffffe3;
 }
+.card-body{
+  padding: 2px;
+}
 .search-border{
   border: 3px solid #00070b;
 }
@@ -71,10 +74,7 @@ body {
   padding-right: 30px;
 } 
 
-.star-icon{
-  display: flex;
-  justify-content: space-between;
-} 
+
 
 
 
@@ -162,3 +162,8 @@ body {
   transition: 0.6s;
 
 } */
+
+/* .star-icon{
+  display: flex;
+  justify-content: space-between;
+}  */
